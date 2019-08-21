@@ -26,3 +26,6 @@ autoIncr: 是否递增
 名称: config.json  
 位置: 对应模板目录下  
 
+link:  
+   weixin: chinaxjc208
+
