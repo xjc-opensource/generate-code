@@ -1,0 +1,55 @@
+{
+	"ver": 1,
+	"path": "E:\\dev\\ext-opensource-web\\web910\\src\\main\\java\\",
+	"defaultDbTableName": "t_db_connect,t_db_table,t_db_table_field,t_login_config,t_login_config_detail",
+	"defaultNormalName": "login",
+	"fileList": [{
+		"processType": "DB_TABLE",
+		"fileName": "jpa_entity.ttl",
+		"newFileName": "[[${functionName}]]Entity.java",
+		"packageName": "[[${var_basePackage}]].entity",
+		"packageAsDir": true,
+		"disable": false
+	},{
+		"processType": "DB_TABLE",
+		"fileName": "jpa_repository.ttl",
+		"newFileName": "[[${functionName}]]Repository.java",
+		"packageName": "[[${var_basePackage}]].repository",
+		"packageAsDir": true,
+		"disable": false
+	}, {
+	    "processType": "NORMAL",
+		"fileName": "controller.ttl",
+		"newFileName": "[[${functionName}]]Controller.java",
+		"packageName": "[[${var_basePackage}]].controller",
+		"packageAsDir": true,
+		"disable": false
+	}, {
+	    "processType": "NORMAL",
+		"fileName": "service.ttl",
+		"newFileName": "[[${functionName}]]Service.java",
+		"packageName": "[[${var_basePackage}]].service",
+		"packageAsDir": true,
+		"disable": false
+	}, {
+	    "processType": "NORMAL",
+		"fileName": "serviceImpl.ttl",
+		"newFileName": "[[${functionName}]]ServiceImpl.java",
+		"packageName": "[[${var_basePackage}]].service.impl",
+		"packageAsDir": true,
+		"disable": false
+	}],
+	"varMap": {
+		"var_author": "ben",
+		"var_basePackage": "ext.opensource.web910"
+	},
+	"dbConnect": {
+		"driver": "com.mysql.jdbc.Driver",
+		"password": "123456",
+		"url": "jdbc:mysql://127.0.0.1:3306/web910?characterEncoding=utf-8",
+		"username": "root"
+	},
+	"jdbcTypeConvertMap": {
+		"VARCHAR": "String"
+	}
+}

@@ -1,0 +1,37 @@
+﻿package [[${_packageName}]];
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+ 
+/**
+* @author [[${var_author}]]
+* @Title: basic
+* @Description:
+**/
+ 
+@Entity
+@Data
+@EqualsAndHashCode(callSuper=true)
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name ="[[${tableDbName}]]")
+public class [[${functionName}]]Entity extends BaseGidEntity {
+    private static final long serialVersionUID = 1L;
+
+    [# th:each="items : ${tableFields}"] 
+	[# th:unless="${items.autoIncr}"]
+	/**
+	* [[${items.remarks}]]
+	*/
+	@Column(name = "[[${items.dbName}]]")
+	private [[${items.javaType}]] [[${items.codeName}]];
+	[/]
+    [/]
+}

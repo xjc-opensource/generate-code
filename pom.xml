@@ -1,0 +1,152 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>ext.opensource</groupId>
+	<artifactId>generatecode</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>ext.opensource.generatecode</name>
+
+	<properties>
+		<infrastructure.version>1.0.61-SNAPSHOT</infrastructure.version>
+		<mysql.version>5.1.30</mysql.version>
+		<fastjson.version>1.2.12</fastjson.version>
+		<h2.version>1.4.197</h2.version>
+		<sqlite.version>3.15.1</sqlite.version>
+		<thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
+		<lombok.version>1.16.20</lombok.version>
+
+		<!-- Specify Java Compiler Version -->
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.xerial</groupId>
+			<artifactId>sqlite-jdbc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.thymeleaf</groupId>
+			<artifactId>thymeleaf</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.infrastructure</groupId>
+			<artifactId>org.infrastructure.jdbc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.infrastructure</groupId>
+			<artifactId>org.infrastructure.utils</artifactId>
+		</dependency>
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.infrastructure</groupId>
+				<artifactId>ojdbc</artifactId>
+				<version>8</version>
+			</dependency>
+
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql.version}</version>
+				<scope>runtime</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>com.h2database</groupId>
+				<artifactId>h2</artifactId>
+				<version>${h2.version}</version>
+				<scope>runtime</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.xerial</groupId>
+				<artifactId>sqlite-jdbc</artifactId>
+				<version>${sqlite.version}</version>
+				<scope>runtime</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>${fastjson.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.infrastructure</groupId>
+				<artifactId>org.infrastructure.jdbc</artifactId>
+				<version>${infrastructure.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.infrastructure</groupId>
+				<artifactId>org.infrastructure.utils</artifactId>
+				<version>${infrastructure.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.thymeleaf</groupId>
+				<artifactId>thymeleaf</artifactId>
+				<version>${thymeleaf.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${lombok.version}</version>
+				<scope>provided</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<fork>true</fork>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<forkMode>once</forkMode>
+					<argLine>-Dfile.encoding=UTF-8</argLine>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

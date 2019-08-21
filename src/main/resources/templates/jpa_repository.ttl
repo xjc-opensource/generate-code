@@ -1,0 +1,16 @@
+﻿package [[${_packageName}]];
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import [[${var_basePackage}]].entity.[[${functionName}]]Entity;
+
+/**
+* @author [[${var_author}]]
+* @Title: basic
+* @Description:
+**/
+
+@Repository
+public interface [[${functionName}]]Repository extends JpaRepository<[[${functionName}]]Entity, Long>{
+
+}

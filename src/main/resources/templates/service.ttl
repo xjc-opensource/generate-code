@@ -1,0 +1,15 @@
+package [[${_packageName}]];
+
+/**
+* @author [[${var_author}]]
+* @Title: [[${functionName}]]Service.java
+* @Description:
+**/
+
+public interface [[${functionName}]]Service {
+    /**
+     * 
+     * @return
+     */
+    Object [[${functiontCamelName}]]_sample();
+}

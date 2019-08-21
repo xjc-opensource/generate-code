@@ -1,0 +1,16 @@
+package [[${_packageName}]];
+
+import [[${var_basePackage}]].service.[[${functionName}]]Service;
+
+/**
+* @author [[${var_author}]]
+* @Title: [[${functionName}]]ServiceImpl.java
+* @Description:
+**/
+
+public class [[${functionName}]]ServiceImpl extends BaseServiceImpl implements [[${functionName}]]Service {
+    @Override
+    public Object [[${functiontCamelName}]]_sample() {
+        return null;
+    }
+}
