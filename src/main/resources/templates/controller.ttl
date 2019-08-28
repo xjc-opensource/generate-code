@@ -33,6 +33,6 @@ public class [[${functionName}]]Controller extends BaseController {
     @RequestMapping(value = "/[[${functiontCamelName}]]/sample", method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestProcess(checkLogin = false)
     public ResultData<Object> login(@Valid @RequestBody Object dto) {
-        return ResultData.createSuccessResult("");
+        return ResultData.createSuccessResult([[${functiontCamelName}]]Service.[[${functiontCamelName}]]_sample());
     }
 }

@@ -2,12 +2,15 @@ package [[${_packageName}]];
 
 import [[${var_basePackage}]].service.[[${functionName}]]Service;
 
+import org.springframework.stereotype.Service;
+
 /**
 * @author [[${var_author}]]
 * @Title: [[${functionName}]]ServiceImpl.java
 * @Description:
 **/
 
+@Service
 public class [[${functionName}]]ServiceImpl extends BaseServiceImpl implements [[${functionName}]]Service {
     @Override
     public Object [[${functiontCamelName}]]_sample() {

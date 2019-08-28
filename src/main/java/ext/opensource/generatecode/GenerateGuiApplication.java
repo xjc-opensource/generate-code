@@ -11,11 +11,22 @@ import javax.swing.JButton;
 import java.awt.FlowLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+
+import ext.opensource.generatecode.template.TemplatesProcess;
+
+import org.infrastructure.jdbc.JdbcTable;
+
 import javax.swing.JList;
 import java.awt.Panel;
 import java.awt.List;
 import java.awt.Label;
 import java.awt.TextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import java.awt.Window.Type;
+import javax.swing.JTextPane;
 
 /**
  * @author ben
@@ -25,63 +36,94 @@ import java.awt.TextField;
 
 public class GenerateGuiApplication {
 
-	private JFrame frame;
+    private JFrame frmGenerateCode;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GenerateGuiApplication window = new GenerateGuiApplication();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    private TemplatesProcess tmpsCfg;
 
-	/**
-	 * Create the application.
-	 */
-	public GenerateGuiApplication() {
-		initialize();
-	}
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    GenerateGuiApplication window = new GenerateGuiApplication();
+                    window.frmGenerateCode.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(123, 47, 143, 24);
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4"}));
-		
-		JLabel lblNewLabel = new JLabel("TableName:");
-		lblNewLabel.setBounds(25, 50, 80, 18);
-		
-		JButton btnNewButton = new JButton("exec");
-		btnNewButton.setBounds(272, 10, 65, 27);
-		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(lblNewLabel);
-		frame.getContentPane().add(comboBox);
-		frame.getContentPane().add(btnNewButton);
-		
-		Label label = new Label("New label");
-		label.setBounds(25, 77, 77, 25);
-		frame.getContentPane().add(label);
-		
-		List list = new List();
-		list.setBounds(123, 77, 140, 155);
-		frame.getContentPane().add(list);
-		
-		TextField textField = new TextField();
-		textField.setBounds(121, 10, 145, 25);
-		frame.getContentPane().add(textField);
-	}
+    /**
+     * Create the application.
+     */
+    public GenerateGuiApplication() {
+        initialize();
+    }
+
+    /**
+     * Initialize the contents of the frame.
+     */
+    private void initialize() {
+
+        frmGenerateCode = new JFrame();
+        frmGenerateCode.setResizable(false);
+        frmGenerateCode.setType(Type.UTILITY);
+        frmGenerateCode.setTitle("Generate Code");
+        frmGenerateCode.setBounds(100, 100, 354, 300);
+        frmGenerateCode.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        JComboBox<String> cbTableName = new JComboBox();
+        cbTableName.setEditable(true);
+        cbTableName.setBounds(107, 11, 143, 24);
+
+        JLabel lblNewLabel = new JLabel("TableName:");
+        lblNewLabel.setBounds(25, 14, 80, 18);
+
+        JButton btnExec = new JButton("exec");
+        btnExec.setBounds(100, 138, 136, 27);
+        frmGenerateCode.getContentPane().setLayout(null);
+        frmGenerateCode.getContentPane().add(lblNewLabel);
+        frmGenerateCode.getContentPane().add(cbTableName);
+        frmGenerateCode.getContentPane().add(btnExec);
+
+        TextField txtNormal = new TextField();
+        txtNormal.setBounds(107, 77, 145, 25);
+        frmGenerateCode.getContentPane().add(txtNormal);
+
+        tmpsCfg = new TemplatesProcess("templates/");
+        //txtNormal.setText(tmpsCfg.getTemplateParameter().getDefaultNormalName());
+        
+        JButton btnExit = new JButton("Exit");
+        btnExit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        btnExit.setBounds(100, 194, 136, 27);
+        frmGenerateCode.getContentPane().add(btnExit);
+        
+        JLabel lblNormal = new JLabel("Normal:");
+        lblNormal.setBounds(25, 77, 80, 18);
+        frmGenerateCode.getContentPane().add(lblNormal);
+
+        java.util.List<JdbcTable> tableList = tmpsCfg.getAllDbTable();
+        cbTableName.addItem("");
+        if (tableList != null) {
+            for (JdbcTable item : tableList) {
+                cbTableName.addItem(item.getTableName());
+            }
+        }
+
+        btnExec.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                tmpsCfg.processByTableFields(cbTableName.getSelectedItem().toString());
+                tmpsCfg.processNormalFile(txtNormal.getText());
+            }
+        });
+        
+        frmGenerateCode.setLocationRelativeTo(null);
+    }
 }

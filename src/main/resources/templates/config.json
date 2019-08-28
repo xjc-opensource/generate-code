@@ -1,8 +1,8 @@
 {
 	"ver": 1,
 	"path": "E:\\dev\\ext-opensource-web\\web910\\src\\main\\java\\",
-	"defaultDbTableName": "t_db_connect,t_db_table,t_db_table_field,t_login_config,t_login_config_detail",
-	"defaultNormalName": "login",
+	"defaultDbTableName": "",
+	"defaultNormalName": "",
 	"fileList": [{
 		"processType": "DB_TABLE",
 		"fileName": "jpa_entity.ttl",
@@ -16,14 +16,14 @@
 		"newFileName": "[[${functionName}]]Repository.java",
 		"packageName": "[[${var_basePackage}]].repository",
 		"packageAsDir": true,
-		"disable": false
+		"disable": true
 	}, {
 	    "processType": "NORMAL",
 		"fileName": "controller.ttl",
 		"newFileName": "[[${functionName}]]Controller.java",
 		"packageName": "[[${var_basePackage}]].controller",
 		"packageAsDir": true,
-		"disable": false
+		"disable": true
 	}, {
 	    "processType": "NORMAL",
 		"fileName": "service.ttl",

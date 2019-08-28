@@ -11,10 +11,13 @@ import java.util.List;
 import java.util.Map;
 import org.infrastructure.jdbc.JdbcColumn;
 import org.infrastructure.jdbc.JdbcTable;
-import org.infrastructure.jdbc.JdbcUtils;
+import org.infrastructure.jdbc.JdbcUtil;
 import org.infrastructure.utils.DirectoryUtil;
 import org.infrastructure.utils.FileUtil;
 import org.infrastructure.utils.StringUtil;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -35,6 +38,8 @@ import ext.opensource.generatecode.template.TemplateEnum.TemplateType;
 
 public class TemplatesProcess {
     private TemplateType templateType;
+    
+    @Getter @Setter
     private TemplateParameter templateParameter;
     private String prefix;
 
@@ -179,12 +184,12 @@ public class TemplatesProcess {
     public List<JdbcTable> getAllDbTable() {
         TemplateDbConnect connectObj = templateParameter.getDbConnect();
         if (connectObj != null) {
-            Connection conn = JdbcUtils.getConnection(connectObj.getDriver(), connectObj.getUrl(),
+            Connection conn = JdbcUtil.getConnection(connectObj.getDriver(), connectObj.getUrl(),
                     connectObj.getUsername(), connectObj.getPassword());
             try {
-                return JdbcUtils.getTables(conn);
+                return JdbcUtil.getTables(conn);
             } finally {
-                JdbcUtils.closeConnection(conn);
+                JdbcUtil.closeConnection(conn);
             }
         }
         return null;
@@ -200,7 +205,7 @@ public class TemplatesProcess {
         }
         TemplateDbConnect connectObj = templateParameter.getDbConnect();
         if (connectObj != null) {
-            Connection conn = JdbcUtils.getConnection(connectObj.getDriver(), connectObj.getUrl(),
+            Connection conn = JdbcUtil.getConnection(connectObj.getDriver(), connectObj.getUrl(),
                     connectObj.getUsername(), connectObj.getPassword());
             try {
 
@@ -210,11 +215,11 @@ public class TemplatesProcess {
                     if (tableName.length() < 1) {
                         continue;
                     }
-                    List<JdbcTable> tableList = JdbcUtils.getTables(conn, tableName);
+                    List<JdbcTable> tableList = JdbcUtil.getTables(conn, tableName);
 
                     JdbcTable tableItem = tableList.get(0);
 
-                    List<JdbcColumn> fieldList = JdbcUtils.getTablesColumnList(conn, tableName);
+                    List<JdbcColumn> fieldList = JdbcUtil.getTablesColumnList(conn, tableName);
 
                     TemplatesDbVar templatesDbVar = new TemplatesDbVar();
                     templatesDbVar.putJdbcType(templateParameter.getJdbcTypeConvertMap());
@@ -226,7 +231,7 @@ public class TemplatesProcess {
                     System.err.println("fieldList:" + tableName + JSON.toJSONString(fieldList));
                 }
             } finally {
-                JdbcUtils.closeConnection(conn);
+                JdbcUtil.closeConnection(conn);
             }
         }
     }
@@ -234,14 +239,13 @@ public class TemplatesProcess {
     public void processByTable() {
         TemplateDbConnect connectObj = templateParameter.getDbConnect();
         if (connectObj != null) {
-            Connection conn = JdbcUtils.getConnection(connectObj.getDriver(), connectObj.getUrl(),
+            Connection conn = JdbcUtil.getConnection(connectObj.getDriver(), connectObj.getUrl(),
                     connectObj.getUsername(), connectObj.getPassword());
             try {
-                List<JdbcTable> tableList = JdbcUtils.getTables(conn);
+                List<JdbcTable> tableList = JdbcUtil.getTables(conn);
                 System.err.println("tableList:" + JSON.toJSONString(tableList));
             } finally {
-
-                JdbcUtils.closeConnection(conn);
+                JdbcUtil.closeConnection(conn);
             }
         }
     }
