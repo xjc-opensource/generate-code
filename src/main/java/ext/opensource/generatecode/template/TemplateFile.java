@@ -16,4 +16,5 @@ public class TemplateFile {
 	private boolean packageAsDir;
 	private String processType;
 	private boolean disable=false;
+	private boolean overwrite=false;
 }

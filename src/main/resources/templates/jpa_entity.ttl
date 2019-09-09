@@ -31,7 +31,7 @@ public class [[${functionName}]]Entity extends BaseGidEntity {
 	* [[${items.remarks}]]
 	*/
 	@Column(name = "[[${items.dbName}]]")
-	private [[${items.javaType}]] [[${items.codeName}]];
+	protected [[${items.javaType}]] [[${items.codeName}]];
 	[/]
     [/]
 }

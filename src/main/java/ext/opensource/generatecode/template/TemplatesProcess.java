@@ -158,9 +158,13 @@ public class TemplatesProcess {
 
             DirectoryUtil.createDir(fileDir, true);
 
+            if ((fileObj.isOverwrite() == false) && (FileUtil.isExistFile(fileDir + desFile)))
+                continue;
+            
             System.out.println("file: " + fileDir + desFile);
             OutputStreamWriter out;
             try {
+               
                 out = new OutputStreamWriter(new FileOutputStream(fileDir + desFile),
                         StandardCharsets.UTF_8);
                 engine.process(souFile, context, out);
@@ -261,6 +265,19 @@ public class TemplatesProcess {
         if ((listStr == null) || (listStr.length() <= 0)) {
             return;
         }
+        if (listStr.equals("*")) {
+            StringBuilder str = new StringBuilder();
+            List<JdbcTable> tableList = getAllDbTable();
+            for (int i=0; i<tableList.size();i++) {
+               if (i>0) {
+                   str.append(",");
+               }
+               str.append(tableList.get(i).getTableName());
+            }
+            listStr = str.toString();
+            System.out.println(listStr);
+        }
+        
         this.processByTableFields(listStr);
     }
 
